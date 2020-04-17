@@ -21,7 +21,22 @@ public class SlowSortsTest {
 		SlowSorts.insertSorted(7, empty);
 		assertEquals(expected, empty);
 	}
+	
+        @Test
+        public void testInsertSortedFront() {
+            ListADT<Integer> actual = new JavaList<>();
+            actual.addBack(2);
+            actual.addBack(3);
 
+            ListADT<Integer> expected = new JavaList<>();
+            expected.addBack(1);
+            expected.addBack(2);
+            expected.addBack(3);
+
+            SlowSorts.insertSorted(1, actual);
+            assertEquals(expected, actual);
+        }
+	
 	@Test
 	public void testInsertSortedMiddle() {
 		ListADT<Integer> actual = new JavaList<>();
