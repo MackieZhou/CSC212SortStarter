@@ -13,9 +13,19 @@ public class SlowSorts {
 	 * @return true if they are sorted, false if not.
 	 */
 	public static boolean isSorted(ListADT<Integer> data) {
-		throw new TODOErr();
-	}
+		int size = data.size();
+		if (size == 1) {
+			return true;
+		} else {
+			for (int i = 0; i < size - 1; i++) {
+				if (data.getIndex(i) > data.getIndex(i + 1)) {
+					return false;
+				}
+			}
+		}
 
+		return true;
+	}
 
 	/**
 	 * Insert the value x in to the sorted list "target" in the correct position.
@@ -25,7 +35,22 @@ public class SlowSorts {
 	 * @param target - the sorted list to modify (might be empty!)
 	 */
 	public static void insertSorted(int x, ListADT<Integer> target) {
-		throw new TODOErr();
+		int size = target.size();
+
+		if (size == 0) {
+			target.addFront(x);
+
+		} else if (target.getBack() < x) {
+			target.addBack(x);
+
+		} else {
+			for (int i = 0; i <= size - 1; i++) {
+				if (target.getIndex(i) >= x) {
+					target.addIndex(i, x);
+					break;
+				}
+			}
+		}
 	}
 
 	/**
@@ -39,7 +64,16 @@ public class SlowSorts {
 	public static int findMinPosition(ListADT<Integer> list, int start) {
 		assert (start < list.size()) : "There should be stuff in the list to the right of start!";
 
-		throw new TODOErr();
+		int pos = start;
+		int min = list.getIndex(start);
+		for (int i = start + 1; i < list.size(); i++) {
+			if (list.getIndex(i) < min) {
+				min = list.getIndex(i);
+				pos = i;
+			}
+		}
+
+		return pos;
 	}
 
 	/**
@@ -51,7 +85,11 @@ public class SlowSorts {
 	 */
 	public static ListADT<Integer> insertionSort(ListADT<Integer> input) {
 		ListADT<Integer> output = new JavaList<>();
-		throw new TODOErr();
+		for (int i = 0; i < input.size(); i++) {
+			insertSorted(input.getIndex(i), output);
+		}
+
+		return output;
 	}
 
 	/**
@@ -65,7 +103,10 @@ public class SlowSorts {
 	 *              in-place.
 	 */
 	public static void selectionSort(ListADT<Integer> fixMe) {
-		throw new TODOErr();
+		for (int i = 0; i < fixMe.size() - 1; i++) {
+			int minPos = findMinPosition(fixMe, i);
+			fixMe.swap(i, minPos);
+		}
 	}
 
 }
